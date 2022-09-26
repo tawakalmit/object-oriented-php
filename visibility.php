@@ -7,17 +7,13 @@ class Produk {
 	public $judul, 
 	 	   $penulis,
 	 	   $penerbit,
-	 	   $harga,
-	 	   $durasi,
-	 	   $waktumain;
+	 	   $harga;
 
-	public function __construct($judul, $penulis, $penerbit, $harga, $durasi, $waktumain) {
+	public function __construct($judul, $penulis, $penerbit, $harga) {
 		$this->judul=$judul;
 		$this->penulis=$penulis;
 		$this->penerbit=$penerbit;
 		$this->harga=$harga;
-		$this->durasi=$durasi;
-		$this->waktumain=$waktumain;
 	}
 
 	public function getLabel(){
@@ -39,21 +35,35 @@ class CetakInfoProduk {
 }
 
 class Film extends Produk {
+	public $durasi;
+
+	public function __construct($judul, $penulis, $penerbit, $harga, $durasi) {
+		parent::__construct($judul, $penulis, $penerbit, $harga);
+		$this->durasi=$durasi;
+	}
+
 	public function getInfoLengkap() {
-		$str = "Komik : " . parent::getInfoLengkap() . "- {$this->durasi} Episode.";
+		$str = "Komik : " . parent::getInfoLengkap() . " - {$this->durasi} Episode.";
 		return $str;
 	}
 }
 
 class Game extends Produk {
+	public $waktumain;
+
+	public function __construct($judul, $penulis, $penerbit, $harga, $waktumain){
+		parent::__construct($judul, $penulis, $penerbit, $harga);
+		$this->waktumain=$waktumain;
+	}
+
 	public function getInfoLengkap() {
-		$str = "Game : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) - {$this->waktumain} Jam.";
+		$str = "Game : " . parent::getInfoLengkap() . " ~ {$this->waktumain} Jam.";
 		return $str;
 	}
 }
 
-$produk3 = new Game("Resident Evil", "Shinji Mikami", "Capcom", 800000, 0, 50);
-$produk4 = new Film("Game of Throne", "GG Martin", "HBO", 800000, 300, 0);
+$produk3 = new Game("Resident Evil", "Shinji Mikami", "Capcom", 800000, 50);
+$produk4 = new Film("Game of Throne", "GG Martin", "HBO", 800000, 300);
 
 echo $produk3->getInfoLengkap();
 echo "<br>";
