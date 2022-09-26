@@ -6,8 +6,9 @@
 class Produk {
 	public $judul, 
 	 	   $penulis,
-	 	   $penerbit,
-	 	   $harga;
+	 	   $penerbit;
+
+	protected $harga;
 
 	public function __construct($judul, $penulis, $penerbit, $harga) {
 		$this->judul=$judul;
@@ -56,6 +57,10 @@ class Game extends Produk {
 		$this->waktumain=$waktumain;
 	}
 
+	public function getHarga() {
+		return $this->harga;
+	}
+
 	public function getInfoLengkap() {
 		$str = "Game : " . parent::getInfoLengkap() . " ~ {$this->waktumain} Jam.";
 		return $str;
@@ -68,3 +73,5 @@ $produk4 = new Film("Game of Throne", "GG Martin", "HBO", 800000, 300);
 echo $produk3->getInfoLengkap();
 echo "<br>";
 echo $produk4->getInfoLengkap();
+echo "<hr>";
+echo $produk3->getHarga();
